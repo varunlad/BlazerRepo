@@ -1,0 +1,129 @@
+﻿@page "/addEmp"
+
+@using BlazorServerApp.Data
+@inject EmployeeServices objCustomerService
+@inject NavigationManager NavigationManager
+
+<div class="form-content">
+    <form class="form" action="post">
+        <div class="form-head">Employee Payroll form</div>
+
+        <div class="row-content">
+            <label class="label text" for="name">Name</label>
+            <input class="input" type="text" id="name" name="name" placeholder="Your name.." @bind="objEmp.Name" required>
+            <error-output class="text-error" for="text"></error-output>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="name">Profile Pics</label>
+            <div class="profile-radio-content">
+                <label>
+                    <input type="radio" id="profile1" name="profile" value="../assets/profile-images/Ellipse -3.png" @onchange="@(() => UpdateProfile("../assets/profile-images/Ellipse -3.png"))">
+                    <img class="profile" id="image1" src="../assets/profile-images/Ellipse -3.png">
+                </label>
+                <label>
+                    <input type="radio" id="profile2" name="profile" value="../assets/profile-images/Ellipse -1.png" @onchange="@(() => UpdateProfile("../assets/profile-images/Ellipse -3.png"))">
+                    <img class="profile" id="image2" src="../assets/profile-images/Ellipse -1.png">
+                </label>
+                <label>
+                    <input type="radio" id="profile3" name="profile" value="../assets/profile-images/Ellipse -8.png" @onchange="@(() => UpdateProfile("../assets/profile-images/Ellipse -3.png"))">
+                    <img class="profile" id="image3" src="../assets/profile-images/Ellipse -8.png">
+                </label>
+                <label>
+                    <input type="radio" id="profile4" name="profile" value="../assets/profile-images/Ellipse -7.png" @onchange="@(() => UpdateProfile("../assets/profile-images/Ellipse -3.png"))">
+                    <img class="profile" id="image4" src="../assets/profile-images/Ellipse -7.png">
+                </label>
+            </div>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="gender">Gender</label>
+            <div>
+                <input type="radio" id="male" name="gender" value="male" @onchange="@(() => UpdateGender("Male"))">
+                <label class="text" for="male">Male</label>
+                <input type="radio" id="Female" name="gender" value="Female" @onchange="@(() => UpdateGender("Female"))">
+                <label class="text" for="Female">Female</label>
+            </div>
+        </div>
+
+
+        <div class="row-content">
+            <label class="label text" for="department">Department</label>
+            <div>
+                <input class="radio" type="radio" id="hr" name="department" value="HR" @onchange="@(() => SetDepartment("HR"))">
+                <label class="text" for="hr">HR</label>
+                <input class="radio" type="radio" id="sales" name="department" value="Sales" @onchange="@(() => SetDepartment("Sales"))">
+                <label class="text" for="sales">Sales</label>
+                <input class="radio" type="radio" id="finance" name="department" value="Finance" @onchange="@(() => SetDepartment("Finance"))">
+                <label class="text" for="finance">Finance</label>
+                <input class="radio" type="radio" id="engineer" name="department" value="Engineer" @onchange="@(() => SetDepartment("Engineer"))">
+                <label class="text" for="engineer">Engineer</label>
+                <input class="radio" type="radio" id="others" name="department" value="Others" @onchange="@(() => SetDepartment("Others"))">
+                <label class="text" for="others">Others</label>
+            </div>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="salary">Choose your salary:</label>
+            <!--<input class="input" type="range" name="salary" id="salary" min="300000" value="400000" max="500000" step="100">-->
+            <input type="number" class="input" name="salary" id="salary" @bind="objEmp.Salary" />
+            <error-output class="salary-output text" id="displaySalary" for="salary"></error-output>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="startdate">Start Date</label>
+            <input id="startdate" type="date" @bind="objEmp.StartDate" />
+        </div>
+        <div class="row-content">
+            <label class="label text" for="notes">Notes</label>
+            <textarea id="notes" class="input" name="Notes" placeholder="" style="height:100px" @bind="objEmp.Notes"></textarea>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="button" class="btn btn-primary" @onclick="@NewEmployee" value="Save" />
+                    <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+                </div>
+            </div>
+        </div>
+        @*<div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="buttonParent">
+                <a href="EmpHome.razor" class="resetButton button cancelButton">Cancel</a>
+                <div class="submit-reset">
+                    <button type="submit" class="button submitButton" id="submitButton">Submit</button>
+                    <button type="reset" class="resetButton button">Reset</button>
+                </div>
+            </div>
+                    </div>
+                </div>
+            </div>*@
+    </form>
+</div>
+
+@code { EmployeeModel objEmp = new EmployeeModel();
+
+    protected void UpdateGender(string gender)
+    {
+        objEmp.Gender = gender;
+    }
+    protected void UpdateProfile(string path)
+    {
+        objEmp.ProfileImage = path;
+    }
+    protected void SetDepartment(string dept)
+    {
+        objEmp.Department = dept;
+    }
+    protected void NewEmployee()
+    {
+        objCustomerService.Create(objEmp);
+        NavigationManager.NavigateTo("EmpHome");
+    }
+
+    protected void Cancel()
+    {
+        NavigationManager.NavigateTo("DisplayEmp");
+    } }
