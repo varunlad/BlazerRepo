@@ -1,0 +1,59 @@
+﻿@page "/EmpHome"
+@using BlazorServerApp.Data
+@inject EmployeeServices objEmpServices
+
+<NavLink class="nav-link" href="AddEmp">
+    <span class="oi oi-plus" aria-hidden="true"></span> Add New
+</NavLink>
+<h1>Customer Data</h1>
+@if (objCtmr == null)
+{
+    <p><em>Loading...</em></p> }
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>ProfileImage</th>
+                <th>Gender</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Start Date</th>
+                <th>Notes</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var temp in objCtmr)
+            {
+                <tr>
+                    <td>@temp.EmployeeId</td>
+                    <td>@temp.Name</td>
+                    <td>@temp.ProfileImage</td>
+                    <td>@temp.Gender</td>
+                    <td>@temp.Department</td>
+                    <td>@temp.Salary</td>
+                    <td>@temp.StartDate</td>
+                    <td>@temp.Notes</td>
+                    <td>
+                        <a class="nav-link" href="EditCustomer/@temp.EmployeeId">
+                            <span class="oi oi-pencil" aria-hidden="true"></span> Edit
+                        </a>
+                        <a class="nav-link" href="DeleteCustomer/@temp.EmployeeId">
+                            <span class="oi oi-trash" aria-hidden="true"></span> Delete
+                        </a>
+                    </td>
+                </tr>
+}
+        </tbody>
+    </table>}
+@code {
+    List<EmployeeModel> objCtmr;
+    protected override async Task OnInitializedAsync()
+    {
+        EmployeeServices employee = new EmployeeServices();
+        objCtmr = await Task.Run(() => employee.GetEmploess());
+    }
+}

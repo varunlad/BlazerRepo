@@ -1,0 +1,121 @@
+﻿
+.header {
+    padding: 15px 0;
+    background-color: aqua;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 0px solid green;
+}
+
+.logo-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0px solid green;
+    width: 80%;
+}
+
+.emp-text {
+    font: normal normal bold 20px/25px Montserrat;
+    font-family: "Montserrat",sans-serif;
+    letter-spacing: 0px;
+    color: #82a70c;
+    text-transform: uppercase;
+}
+
+.emp-payroll {
+    color: #42515f
+}
+
+.add-button {
+    font: normal normal normal 22px/29px Roboto;
+    color: white;
+    opacity: 1;
+    background: #82a70c 0% 0% no-repeat padding-box;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 18px 5px;
+    cursor: pointer;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh-88px);
+    background: #f7f7f7;
+    padding: 30px 0px 10px;
+    box-sizing: border-box;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto;
+    padding-bottom: 25px;
+}
+
+.emp-detail-text {
+    font: normal normal bold 24px/25px Roboto;
+    color: #42515f;
+    opacity: 1;
+}
+
+.emp-count {
+    background-color: #82a70c;
+    color: #ffff;
+    border-radius: 42%;
+    font-size: 16px;
+    width: 26px;
+    text-align: center;
+    display: inline-block;
+}
+
+
+.table-main {
+    width: 80%;
+    margin: 0 auto;
+    overflow: auto;
+}
+
+.table {
+    border-collapse: separate;
+    border-spacing: 0px 25px;
+    min-width: 160px;
+}
+
+
+th {
+    background: #e3e3e3;
+    border-radius: 3px 3px 0px 0px;
+    text-align: left;
+    font: normal normal bold 18px/24px Roboto;
+    align-self: auto;
+    text-transform: uppercase;
+    border: 0px solid #dddddd;
+}
+
+tr:not(:first-child) {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 1px solid #e3e3e3;
+    border-radius: 3px;
+}
+
+
+.dept-lable {
+    background-color: #e9fea5;
+    border-radius: 40%;
+    padding: 1px 7px;
+    text-align: center;
+    font-size: 14px;
+    display: inline-block;
+    font-weight: 300;
+    margin-bottom: 8px
+}
