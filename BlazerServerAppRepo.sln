@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazerServerAppRepo", "BlazerServerAppRepo\BlazerServerAppRepo.csproj", "{702D0A8C-7689-4F01-B210-668A32C32A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazerServerAppRepo", "BlazerServerAppRepo\BlazerServerAppRepo.csproj", "{702D0A8C-7689-4F01-B210-668A32C32A3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
