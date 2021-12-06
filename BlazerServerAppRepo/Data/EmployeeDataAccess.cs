@@ -56,6 +56,34 @@ namespace BlazerServerAppRepo.Data
                 con.Close();
             }
         }
+        public EmployeeModel GetEmployeeData(int? id)
+        {
+            EmployeeModel employee = new EmployeeModel();
+
+            using (MySqlConnection con = new MySqlConnection(connectionString))
+            {
+
+                MySqlCommand cmd = new MySqlCommand("sp_GetEmpByID", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@eID", id);
+                con.Open();
+                MySqlDataReader rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    employee.EmployeeId = Convert.ToInt32(rdr["Empid"]);
+                    employee.Name = rdr["Name"].ToString();
+                    employee.ProfileImage = rdr["ProfileImage"].ToString();
+                    employee.Gender = rdr["Gender"].ToString();
+                    employee.Department = rdr["Department"].ToString();
+                    employee.Salary = Convert.ToInt32(rdr["Salary"]);
+                    employee.StartDate = (DateTime)(rdr["StartDate"] == DBNull.Value ? default(DateTime) : rdr["StartDate"]);
+                    employee.Notes = rdr["Note"].ToString();
+                }
+            }
+            return employee;
+        }
         //To Delete the record on a particular Customer  
         public void DeleteEmployee(int? empid)
         {
