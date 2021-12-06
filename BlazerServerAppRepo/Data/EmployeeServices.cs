@@ -18,5 +18,15 @@ namespace BlazerServerAppRepo.Data
             empDAL.AddEmployee(objCustomer);
             return "Added Successfully";
         }
+        public EmployeeModel GetEmployeeData(int id)
+        {
+            EmployeeModel employee = empDAL.GetEmployeeData(id);
+            return employee;
+        }
+        public string DeleteEmployee(EmployeeModel employee)
+        {
+            empDAL.DeleteEmployee(employee.EmployeeId);
+            return "Delete Successfully";
+        }
     }
 }
