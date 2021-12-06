@@ -56,5 +56,18 @@ namespace BlazerServerAppRepo.Data
                 con.Close();
             }
         }
+        //To Delete the record on a particular Customer  
+        public void DeleteEmployee(int? empid)
+        {
+            using (MySqlConnection con = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand("sp_DeleteEmp", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Employeeid", empid);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
     }
 }
