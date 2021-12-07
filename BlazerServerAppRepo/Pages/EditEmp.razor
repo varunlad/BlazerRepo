@@ -1,0 +1,67 @@
+﻿@page "/EditEmployee/{employeeId}"
+@using BlazerServerAppRepo.Data
+@using System;
+@inject EmployeeServices ObjCustomService
+@inject NavigationManager NavigationManager
+
+<div class="form-content">
+    <form class="form" action="EmpHome">
+        <div class="form-head">Employee Payroll form</div>
+
+        <div class="row-content">
+            <label class="label text" for="name">Employee Id</label>
+            <input class="input" type="text" placeholder="Your name.." @bind="objEmp.EmployeeId" readonly>
+            <error-output class="text-error" for="text"></error-output>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="name">Name</label>
+            <input class="input" type="text" id="name" name="name" placeholder="Your name.." @bind="objEmp.Name" required>
+            <error-output class="text-error" for="text"></error-output>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="salary">Choose your salary:</label>
+            <!--<input class="input" type="range" name="salary" id="salary" min="300000" value="400000" max="500000" step="100">-->
+            <input type="number" class="input" name="salary" id="salary" @bind="objEmp.Salary" />
+            <error-output class="salary-output text" id="displaySalary" for="salary">400000</error-output>
+        </div>
+
+        <div class="row-content">
+            <label class="label text" for="startdate">Start Date</label>
+            <input id="startdate" type="date" min="2018-01-01" @bind="objEmp.StartDate" />
+        </div>
+        <div class="row-content">
+            <label class="label text" for="notes">Notes</label>
+            <textarea id="notes" class="input" name="Notes" placeholder="" style="height:100px" @bind="objEmp.Notes"></textarea>
+        </div>
+
+        <div class="buttonParent">
+            <button type="reset" class="btn btn-danger" @onclick="@Cancel">Cancel</button>
+            <div class="submit-reset">
+                <button type="submit" class="btn btn-primary" id="submitButton" @onclick="@UpdateEmp">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@code { [Parameter]
+    public string employeeId { get; set; }
+    EmployeeModel objEmp = new EmployeeModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        objEmp = await Task.Run(() => ObjCustomService.GetEmployeeData(Convert.ToInt32(employeeId)));
+    }
+
+    protected void UpdateEmp()
+    {
+        ObjCustomService.UpdateEmployee(objEmp);
+        NavigationManager.NavigateTo("DisplayEmp");
+    }
+
+    protected void Cancel()
+    {
+        NavigationManager.NavigateTo("DisplayEmp");
+    } }
