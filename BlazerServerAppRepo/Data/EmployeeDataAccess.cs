@@ -97,5 +97,21 @@ namespace BlazerServerAppRepo.Data
                 con.Close();
             }
         }
+        public void UpdateEmployee(EmployeeModel Emp)
+        {
+            using (MySqlConnection con = new MySqlConnection(connectionString))
+            {
+                MySqlCommand cmd = new MySqlCommand("sp_EditEmp", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@eId", Emp.EmployeeId);
+                cmd.Parameters.AddWithValue("@ename", Emp.Name);
+                cmd.Parameters.AddWithValue("@esalary", Emp.Salary);
+                cmd.Parameters.AddWithValue("@estartdate", Emp.StartDate);
+                cmd.Parameters.AddWithValue("@enote", Emp.Notes);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                con.Close();
+            }
+        }
     }
 }
