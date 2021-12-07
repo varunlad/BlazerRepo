@@ -28,5 +28,10 @@ namespace BlazerServerAppRepo.Data
             empDAL.DeleteEmployee(employee.EmployeeId);
             return "Delete Successfully";
         }
+        public string UpdateEmployee(EmployeeModel objEmp)
+        {
+            empDAL.UpdateEmployee(objEmp);
+            return "Update Successful";
+        }
     }
 }
