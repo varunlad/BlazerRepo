@@ -1,19 +1,29 @@
-﻿using MySql.Data.MySqlClient;
+﻿using EmpModel;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace BlazerServerAppRepo.Data
+namespace EmpDataAccess
 {
-    public class EmployeeDataAccess
+    public class EmployeeDataAccess : IEmployeeDataAccess
     {
-        string connectionString = "server=localhost;User=root;password=sujata@10;database=Emp_Wage_DB";
+
+        private readonly IConfiguration _config;
+        public string connectionString { get; set; } = "Emp_Wage_DB";
+        public EmployeeDataAccess(IConfiguration config)
+        {
+            _config = config;
+        }
+        //string connectionString = "server=localhost;User=root;password=sujata@10;database=Emp_Wage_DB";
+
         public IEnumerable<EmployeeModel> GetAllEmployee()
         {
+            string ConnectionStrings = _config.GetConnectionString(connectionString);
             List<EmployeeModel> lstCustomer = new List<EmployeeModel>();
-            using (MySqlConnection con = new MySqlConnection(connectionString))
+            using (MySqlConnection con = new MySqlConnection(ConnectionStrings))
             {
                 MySqlCommand cmd = new MySqlCommand("sp_GetAllEmp", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -38,7 +48,8 @@ namespace BlazerServerAppRepo.Data
         }
         public void AddEmployee(EmployeeModel model)
         {
-            using (MySqlConnection con = new MySqlConnection(connectionString))
+            string ConnectionStrings = _config.GetConnectionString(connectionString);
+            using (MySqlConnection con = new MySqlConnection(ConnectionStrings))
             {
                 MySqlCommand cmd = new MySqlCommand("sp_AddEmp", con);
                 //Ename is requred
@@ -59,8 +70,8 @@ namespace BlazerServerAppRepo.Data
         public EmployeeModel GetEmployeeData(int? id)
         {
             EmployeeModel employee = new EmployeeModel();
-
-            using (MySqlConnection con = new MySqlConnection(connectionString))
+            string ConnectionStrings = _config.GetConnectionString(connectionString);
+            using (MySqlConnection con = new MySqlConnection(ConnectionStrings))
             {
 
                 MySqlCommand cmd = new MySqlCommand("sp_GetEmpByID", con);
@@ -87,7 +98,8 @@ namespace BlazerServerAppRepo.Data
         //To Delete the record on a particular Customer  
         public void DeleteEmployee(int? empid)
         {
-            using (MySqlConnection con = new MySqlConnection(connectionString))
+            string ConnectionStrings = _config.GetConnectionString(connectionString);
+            using (MySqlConnection con = new MySqlConnection(ConnectionStrings))
             {
                 MySqlCommand cmd = new MySqlCommand("sp_DeleteEmp", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -99,7 +111,8 @@ namespace BlazerServerAppRepo.Data
         }
         public void UpdateEmployee(EmployeeModel Emp)
         {
-            using (MySqlConnection con = new MySqlConnection(connectionString))
+            string ConnectionStrings = _config.GetConnectionString(connectionString);
+            using (MySqlConnection con = new MySqlConnection(ConnectionStrings))
             {
                 MySqlCommand cmd = new MySqlCommand("sp_EditEmp", con);
                 cmd.CommandType = CommandType.StoredProcedure;
