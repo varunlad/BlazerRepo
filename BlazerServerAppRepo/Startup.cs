@@ -1,4 +1,6 @@
 using BlazerServerAppRepo.Data;
+using EmpDataAccess;
+using EmployeeServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -15,9 +17,11 @@ namespace BlazerServerAppRepo
 {
     public class Startup
     {
+        public string ConnectionStrings { get; private set; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            ConnectionStrings = Configuration["ConnectionStrings:Emp_Wage_DB"];
         }
 
         public IConfiguration Configuration { get; }
@@ -29,7 +33,9 @@ namespace BlazerServerAppRepo
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
-            services.AddTransient<EmployeeServices>();
+            services.AddTransient<IEmployeeDataAccess, EmployeeDataAccess>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

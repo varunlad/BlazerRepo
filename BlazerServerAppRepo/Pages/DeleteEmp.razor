@@ -1,7 +1,10 @@
 ﻿@page "/DeleteEmp/{CurretnID}"
+
 @using System
-@using BlazerServerAppRepo.Data
-@inject EmployeeServices objCustomerService
+@using BlazerServerAppRepo
+@using EmployeeServices
+@using EmpModel
+@inject IEmployeeService employee
 @inject NavigationManager NavigationManager
 <h2>Delete Employee</h2>
 <hr />
@@ -50,7 +53,6 @@
         </div>
     </div>
 </div>
-
 @code {
     [Parameter]
     public string CurretnID { get; set; }
@@ -58,11 +60,11 @@
 
     protected override async Task OnInitializedAsync()
     {
-        objCI = objCustomerService.GetEmployeeData(Convert.ToInt32(CurretnID));
+        objCI = employee.GetEmployeeData(Convert.ToInt32(CurretnID));
     }
     protected void Delete()
     {
-        objCustomerService.DeleteEmployee(objCI);
+        employee.DeleteEmployee(objCI);
         NavigationManager.NavigateTo("EmpHome");
     }
     void Cancel()

@@ -1,7 +1,8 @@
 ﻿@page "/addEmp"
-
-@using BlazerServerAppRepo.Data
-@inject EmployeeServices objCustomerService
+@using BlazerServerAppRepo
+@using EmployeeServices
+@using EmpModel
+@inject IEmployeeService employee
 @inject NavigationManager NavigationManager
 
 <div class="form-content">
@@ -82,28 +83,16 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <input type="button" class="btn btn-primary" @onclick="@NewEmployee" value="Save" />
-                    <input type="button" class="btn btn-primary" @onclick="@Cancel" value="Cancel" />
+                    <input type="button" @onclick="@NewEmployee" class="btn btn-primary" value="Save" />
+                    <input type="button" @onclick="@Cancel" class="btn btn-primary" value="Cancel" />
                 </div>
             </div>
         </div>
-        @*<div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <div class="buttonParent">
-                <a href="EmpHome.razor" class="resetButton button cancelButton">Cancel</a>
-                <div class="submit-reset">
-                    <button type="submit" class="button submitButton" id="submitButton">Submit</button>
-                    <button type="reset" class="resetButton button">Reset</button>
-                </div>
-            </div>
-                    </div>
-                </div>
-            </div>*@
     </form>
 </div>
 
 @code { EmployeeModel objEmp = new EmployeeModel();
+
 
     protected void UpdateGender(string gender)
     {
@@ -119,7 +108,7 @@
     }
     protected void NewEmployee()
     {
-        objCustomerService.Create(objEmp);
+        employee.Create(objEmp);
         NavigationManager.NavigateTo("EmpHome");
     }
 
