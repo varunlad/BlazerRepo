@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpModel", "EmpModel\EmpMod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpDataAccess", "EmpDataAccess\EmpDataAccess.csproj", "{E25F1F29-0A16-4907-B5BE-47F1CE8151ED}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeServices", "EmployeeServices\EmployeeServices.csproj", "{CC00BC94-D92B-4B11-98B3-56F7737D093E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E25F1F29-0A16-4907-B5BE-47F1CE8151ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E25F1F29-0A16-4907-B5BE-47F1CE8151ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E25F1F29-0A16-4907-B5BE-47F1CE8151ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC00BC94-D92B-4B11-98B3-56F7737D093E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC00BC94-D92B-4B11-98B3-56F7737D093E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC00BC94-D92B-4B11-98B3-56F7737D093E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC00BC94-D92B-4B11-98B3-56F7737D093E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
